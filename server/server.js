@@ -21,19 +21,20 @@ io.on('connection',(socket)=>{
   //   text:"Hey,what is going on",
   //   createdAt:123
   // });
-  socket.emit('newMessage',{
-    from:"Raju",
-    text:"How are you?",
-    createdAt:123
-  });
+
 
   //Listening Events
   // socket.on('createEmail',(newEmail)=>{
   //   console.log('Create Email',newEmail);
   // });
 
-  socket.on('createMessage',(newMesage)=>{
-    console.log('Created Message',newMesage);
+  socket.on('createMessage',(message)=>{
+    console.log('createdMessage',message);
+    io.emit('newMessage',{
+      from:message.from,
+      text:message.text,
+      createdAt:new Date().getTime()
+    });
   });
 
 });
