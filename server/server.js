@@ -24,22 +24,24 @@ io.on('connection',(socket)=>{
   //   createdAt:123
   // });
 
-
   //Listening Events
-  // socket.on('createEmail',(newEmail)=>{
-  //   console.log('Create Email',newEmail);
-  // });
+  socket.on('newMessage',(newMessage)=>{
+    console.log('Create Message',newMessage);
+  });
 
   socket.on('createMessage',(message)=>{
     console.log('createdMessage',message);
     io.emit('newMessage',generateMessage(message.from,message.text));
     });
 
+
   socket.emit('newMessage',generateMessage('Admin','Welcome to chat app'));
   socket.broadcast.emit('newMessage',generateMessage('Admin','New user Joined'));
 
 
 });
+
+
 
 app.use(express.static(publicPath));
 //Start the server.
