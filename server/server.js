@@ -34,6 +34,12 @@ io.on('connection',(socket)=>{
     io.emit('newMessage',generateMessage(message.from,message.text));
     });
 
+    socket.on('createLocationMessage',(coords)=>{
+
+        io.emit('newMessage',generateMessage('Admin',`${coords.latitude},${coords.longitude}`));
+
+    });
+
 
   socket.emit('newMessage',generateMessage('Admin','Welcome to chat app'));
   socket.broadcast.emit('newMessage',generateMessage('Admin','New user Joined'));
