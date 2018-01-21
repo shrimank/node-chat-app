@@ -30,9 +30,10 @@ io.on('connection',(socket)=>{
     callback('Done');
   });
 
-  socket.on('createMessage',(message)=>{
+  socket.on('createMessage',(message,callback)=>{
     console.log('createdMessage',message);
     io.emit('newMessage',generateMessage(message.from,message.text));
+    callback();
     });
 
     socket.on('createLocationMessage',(coords)=>{
